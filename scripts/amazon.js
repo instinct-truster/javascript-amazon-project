@@ -52,13 +52,49 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">Add to Cart</button>
+          <button class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id="${product.id}">Add to Cart</button>
         </div>`;
 });
-console.log(productsHTML);
 
 // Now to put it on the web page using the DOM, add a "js-class" to mark our target for use. Then delete the older HTML code that was replaced.
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
 // The benefit of "generating the HTML" with JS is not having to copy-paste the "rote" HTML over and over, but rather now we only need to add the data for each new product.
+
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.dataset.productId;
+
+    let matchingItem;
+
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+    });
+
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+      });
+    }
+
+    console.log(cart);
+  });
+});
+
+// How do we know which product to add to cart? "DATA ATTRIBUTE". Data Attribute is just another HTML attribute.  Allows us to attach any information to an element.
+
+// Syntax for a Data Attribute: name (on left) value (on right). example:data-product-name="${product.name}" It MUST START with "data-"  (the word data and a dash) then give it any name. "data-whatever-whatever". When using "button.dataset.productName" we take the whatevers that come after "data" and convert the "kebob-case" "whatever-whatever" to "camelCase" whateverWhatever.
+
+// Steps to solve cart adding multiple quantities via multiple clicks.
+// Step 1. Check to see if the product is already in the cart.
+// Step 2. If it is in the cart, increase the quantity.
+// Step 3. If it is NOT in the cart, add it to the cart.
+
+// To solve the problem of using "product name" when there could be more than one seller using the same generic "T-Shirt 3-pack" item name, we can give each product a unique "ID" to identify them as originals.
