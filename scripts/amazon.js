@@ -1,33 +1,3 @@
-const products = [
-  {
-    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-    name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-    rating: {
-      stars: 4.5,
-      count: 87,
-    },
-    priceCents: 1090,
-  },
-  {
-    image: "images/products/intermediate-composite-basketball.jpg",
-    name: "Intermediate Size Basketball",
-    rating: {
-      stars: 4,
-      count: 127,
-    },
-    priceCents: 2095,
-  },
-  {
-    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
-    name: "Adults Plain Cotton T-Shirt - 2 Pack",
-    rating: {
-      stars: 4.5,
-      count: 56,
-    },
-    priceCents: 799,
-  },
-];
-
 // To combine all of the following HTML together into one string, we create a variable at the top called "productsHTML", make it equal to an empty string to start, then each time we go through the loop, we'll add the HTML string.
 
 let productsHTML = "";
@@ -90,3 +60,5 @@ console.log(productsHTML);
 // Now to put it on the web page using the DOM, add a "js-class" to mark our target for use. Then delete the older HTML code that was replaced.
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+// The benefit of "generating the HTML" with JS is not having to copy-paste the "rote" HTML over and over, but rather now we only need to add the data for each new product.
